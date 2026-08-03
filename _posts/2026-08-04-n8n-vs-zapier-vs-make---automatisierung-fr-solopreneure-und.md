@@ -3,7 +3,7 @@ layout: post
 title: "n8n vs Zapier vs Make - Automatisierung für Solopreneure und Teams"
 description: "Vergleich der KI-Tools n8n, Zapier und Make. Ermittle, welches Tool für dich am besten passt, um deine Arbeitsabläufe zu automatisieren."
 topic: "n8n vs Zapier vs Make Vergleich"
-date: 2026-08-04 09:00:00 +0200
+date: 2026-08-04 01:25:42 +0200
 ---
 
 ## n8n – Der Knotenbasierte Automationsrechner
