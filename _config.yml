@@ -1,0 +1,11 @@
+title: KI-Tools & Automatisierung
+description: >-
+  Praktische Anleitungen und Vergleiche zu KI-Tools und Automatisierung
+  fuer Solopreneure und kleine Teams.
+baseurl: "/ai-solopreneur-blog"
+url: ""
+theme: minima
+plugins:
+  - jekyll-feed
+show_excerpts: true
+permalink: /:year/:month/:day/:title/
