@@ -111,6 +111,8 @@ Sobald du personenbezogene Daten (Namen, E-Mail-Adressen) durch ein Tool schicks
 2. **Deine Workflows haben mehr als zwei, drei Schritte?** Make ist meist die günstigste bezahlte Option.
 3. **Du hast Hunderte Durchläufe pro Tag oder sensible Daten?** n8n – selbst gehostet ab etwa 5 € im Monat für einen kleinen Server.
 
+Du willst mit n8n nicht bei null anfangen? Unsere [10 fertigen n8n-Workflows für Solopreneure]({{ site.baseurl }}/n8n-workflows/) nehmen dir Belege, Anfragen, Zahlungserinnerungen und E-Mail-Entwürfe ab.
+
 ## Häufige Fragen
 
 **Ist n8n wirklich kostenlos?**

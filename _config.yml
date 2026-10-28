@@ -15,6 +15,7 @@ show_excerpts: true
 permalink: /:year/:month/:day/:title/
 future: true
 header_pages:
+  - n8n-workflows.md
   - werbehinweis.md
   - impressum.md
   - datenschutz.md
