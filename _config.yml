@@ -2,11 +2,23 @@ title: KI-Tools & Automatisierung
 description: >-
   Praktische Anleitungen und Vergleiche zu KI-Tools und Automatisierung
   fuer Solopreneure und kleine Teams.
+lang: de-DE
+timezone: Europe/Berlin
+url: "https://thaproduct.github.io"
 baseurl: "/ai-solopreneur-blog"
-url: ""
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 show_excerpts: true
 permalink: /:year/:month/:day/:title/
 future: true
+header_pages:
+  - n8n-workflows.md
+  - werbehinweis.md
+  - impressum.md
+  - datenschutz.md
+exclude:
+  - CONTENT_GUIDE.md
+  - docs/
