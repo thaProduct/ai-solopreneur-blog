@@ -46,7 +46,7 @@ In der Vorlage selbst stecken keine laufenden Kosten.
 
 ## Preis: 15 €
 
-<p><a href="STRIPE_PAYMENT_LINK" style="display:inline-block;padding:12px 24px;background:#2a7ae2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold;">Jetzt für 15 € kaufen</a></p>
+<p><a href="https://buy.stripe.com/8x2bJ10KdbmCg1wb7O8IU03" style="display:inline-block;padding:12px 24px;background:#2a7ae2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold;">Jetzt für 15 € kaufen</a></p>
 
 Nach der Zahlung bekommst du sofort den Download-Link (ZIP mit allen
 Dateien). Du darfst die Workflows für eigene und Kundenprojekte nutzen und
