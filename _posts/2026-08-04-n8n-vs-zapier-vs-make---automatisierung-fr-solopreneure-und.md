@@ -6,68 +6,98 @@ topic: "n8n vs Zapier vs Make Vergleich"
 date: 2026-08-04 01:25:42 +0200
 ---
 
-## n8n – Der Knotenbasierte Automationsrechner
+n8n, Zapier und Make lösen dasselbe Problem: Apps miteinander verbinden und
+wiederkehrende Abläufe automatisieren. Sie richten sich aber an
+unterschiedliche Nutzer. Hier die Unterschiede, die für Solopreneure und
+kleine Teams wirklich zählen.
 
-n8n ist eine leistungsstarke Automatisierungssuite mit einer visuellen Benutzeroberfläche und integriertem Code. Diese Kombination ermöglicht es technischen Teams, sowohl komplexe Geschäftsprozesse als auch einfache Automatisierungen zu erstellen.
+## n8n – flexibel und selbst hostbar
+
+n8n ist ein Workflow-Tool mit visuellem Editor, in das du bei Bedarf eigenen
+JavaScript- oder Python-Code einbauen kannst. Das macht es zur ersten Wahl
+für technisch interessierte Nutzer und komplexe Abläufe.
 
 ### Vorteile von n8n
 
-- **Knotenbasierte Struktur:** Die visuelle Benutzeroberfläche ermöglicht das Erstellen von Flows über Knoten. Jeder Knoten repräsentiert eine Aktion, die in der Workflow-Struktur platziert werden kann.
-- **Codierbarkeit:** n8n erlaubt es, Code direkt in den Workflows zu integrieren, was komplexe Automatisierungen ermöglicht.
-- **Integrationen:** Over 500 integrierte Anwendungen sind verfügbar, und selbst für nicht integrierte Apps kann man die HTTP-Anfrage-Knoten verwenden.
-- **Self-Hosting und Managed Cloud Service:** Es bietet sowohl eine self-hosted Option als auch einen vertrauenswürdigen Cloud-Dienst.
+- **Visueller Editor mit Nodes:** Jeder Node ist ein Schritt im Workflow, z. B.
+  „Zeile aus Google Sheets holen“ oder „Nachricht an Telegram senden“.
+- **Code, wo du ihn brauchst:** Code-Nodes für Datenumformung, die mit
+  Klicks allein mühsam wäre.
+- **Viele Integrationen plus HTTP-Request:** Für alles, was es nicht als
+  fertigen Node gibt, rufst du die API direkt auf.
+- **Selbst hosten oder Cloud:** Selbst gehostet zahlst du nur deinen Server,
+  alternativ gibt es n8n Cloud.
 
-### Beispiel: Automatisierung eines AI-Agentenworkflows
+### Beispiel: KI-Content-Pipeline
 
-Ein technisches Team könnte mit n8n Workflows erstellen, die mehrere AI-Agenten verwalten. Dies umfasst die Möglichkeit, Prozesse wie die Überprüfung von Unit-Tests, das Erstellen neuer Tickets und das Melden von Fehlern zu automatisieren.
+Mit n8n lässt sich z. B. eine komplette Content-Pipeline bauen: Thema aus
+einer Tabelle holen, Skript per KI-API schreiben lassen, Freigabe per
+Telegram und Vertonung per Text-to-Speech-API. Wie das konkret aussieht,
+zeige ich in
+[YouTube-Skripte automatisch erstellen mit n8n, Claude und ElevenLabs]({{ site.baseurl }}/2026/10/30/youtube-skripte-automatisch-n8n-claude-elevenlabs/).
 
 ### Nachteile von n8n
 
-- **Steilangestiegen:** Da n8n sowohl für Anfänger als auch fortgeschrittene Benutzer gedacht ist, kann die Kurve der Lernen anfangs steil sein.
-- **Preis:** Die kostenfreie Version hat einige Einschränkungen und es gibt eine bezahlte Variante.
+- **Steilere Lernkurve:** Für komplexe Workflows musst du verstehen, wie Daten
+  zwischen Nodes fließen.
+- **Selbst hosten heißt selbst warten:** Updates, Backups und Sicherheit
+  liegen bei dir.
 
-## Zapier – Einfache Automatisierung für Anfänger
+## Zapier – der einfachste Einstieg
 
-Zapier ist ein benutzerfreundliches Tool, das einfache Automatisierungsabläufe ermöglicht. Es wird von vielen Non-Technikern bevorzugt, da es einen leichten Einstieg und eine intuitive Benutzeroberfläche bietet.
+Zapier ist auf Einfachheit ausgelegt und bietet die größte Auswahl an
+fertigen App-Integrationen. Ein „Zap“ besteht aus einem Auslöser und einer
+oder mehreren Aktionen.
 
 ### Vorteile von Zapier
 
-- **Einfach zu Nutzen:** Für Anfänger und Einsteiger ist Zapier einfach zu verwenden.
-- **Integrationen:** Es bietet über 3000 integrierte Anwendungen.
-- **Automatisierungsschritte:** Man kann Schritte wie E-Mail-Sendungen, Social Media-Aktivitäten oder Datenspeicherung automatisieren.
+- **Sehr einsteigerfreundlich:** Ein einfacher Zap ist in wenigen Minuten
+  eingerichtet.
+- **Riesige App-Auswahl:** Mehrere tausend Apps lassen sich direkt anbinden.
 
-### Beispiel: Automatisierung von E-Mail-Bestellungen
+### Beispiel: Bestellbestätigung
 
-Ein Benutzer könnte eine Zapier-Zap erstellen, die nachdem ein neuer Eintrag in einer CRM-Datenbank angelegt wurde, eine Bestätigungs-E-Mail an den Käufer sendet.
+Sobald ein neuer Eintrag in deinem CRM angelegt wird, schickt ein Zap
+automatisch eine Bestätigungs-E-Mail an den Kunden.
 
 ### Nachteile von Zapier
 
-- **Eingeschränkte Funktionalität:** Die Automatisierung ist eher einfache Schritte, und für komplexere Prozesse gibt es weniger Flexibilität.
-- **Preis:** Es gibt kostenpflichtige Pläne, die zusätzliche Funktionen bieten.
+- **Komplexe Logik wird umständlich:** Verzweigungen und Schleifen sind
+  möglich, aber weniger flexibel als bei n8n oder Make.
+- **Kosten steigen mit dem Volumen:** Abgerechnet wird nach ausgeführten
+  Aufgaben. Bei vielen Durchläufen wird es schnell teuer.
 
-## Make – Für Anfänger mit Code
+## Make – visuell und mächtig
 
-Make vereint Visualisierung und Programmierung, was ihm eine unique Position in der Automatisierungslandschaft einräumt. Es eignet sich für Benutzer, die eine grundlegende Vorstellung von Codierung haben.
+Make (früher Integromat) liegt zwischen den beiden: Workflows heißen dort
+„Szenarien“ und werden als Flussdiagramm gebaut. Verzweigungen, Schleifen und
+Datenumformung gehen ohne Code.
 
 ### Vorteile von Make
 
-- **Visual Editor:** Anfänger können Workflows visuell erstellen.
-- **Codierbarkeit:** Für fortgeschrittene Nutzer gibt es die Möglichkeit, Code in den Workflows zu integrieren.
-- **Integrationen:** Es bietet über 1000 integrierte Anwendungen.
+- **Übersichtlicher visueller Editor:** Auch komplexe Abläufe bleiben als
+  Diagramm gut lesbar.
+- **Viel Logik ohne Code:** Router, Filter und Iteratoren sind eingebaut.
+- **Meist günstiger als Zapier** bei vergleichbarem Volumen.
 
-### Beispiel: Automatisierung eines Workflow-Prozesses
+### Beispiel: Bestellung weiterverarbeiten
 
-Ein Benutzer könnte einen Make-Zap erstellen, der nach dem Ermitteln neuer Daten eine Bestellung in einer CRM-Datenbank tätigt und dann eine Bestätigungs-E-Mail an den Käufer sendet.
+Ein Szenario erkennt eine neue Bestellung, legt sie im CRM an und schickt
+anschließend die Bestätigungs-E-Mail.
 
 ### Nachteile von Make
 
-- **Steilangestiegen:** Die Kurve der Lernkurve ist stärker als bei Zapier, aber leichter als bei n8n.
-- **Eingeschränkte Funktionalität für fortgeschrittene Nutzer:** Verglichen mit n8n bietet es weniger Möglichkeiten, komplexe Automatisierungen zu erstellen.
+- **Lernkurve:** Steiler als bei Zapier, aber flacher als bei n8n.
+- **Kein Selbst-Hosting:** Make läuft nur in der Cloud.
 
 ## Fazit
 
-- **n8n** ist die beste Wahl, wenn du eine leistungsstarke, flexibele und codierbare Automationsplattform suchst.
-- **Zapier** eignet sich gut für Anfänger und Benutzer, die einfache Automatisierungen erstellen möchten.
-- **Make** bietet eine gute Kombination aus Visualisierung und Codierbarkeit für Benutzer mit grundlegendem Programmierwissen.
+- **n8n:** Die beste Wahl, wenn du maximale Flexibilität willst, Code nicht
+  scheust oder selbst hosten möchtest.
+- **Zapier:** Ideal für schnelle, einfache Automatisierungen ohne
+  Einarbeitung.
+- **Make:** Der Mittelweg für komplexere Abläufe, ganz ohne Code.
 
-Welches Tool passt am besten zu deinen Bedürfnissen? Überprüfe die spezifischen Anforderungen und denken über deine Fähigkeiten nach, um das passende Werkzeug zu finden.
+Überlege, wie komplex deine Abläufe sind und wie viel Zeit du in die
+Einarbeitung stecken willst. Danach fällt die Wahl meist leicht. Aktuelle
+Preise findest du jeweils auf der Website des Anbieters.
