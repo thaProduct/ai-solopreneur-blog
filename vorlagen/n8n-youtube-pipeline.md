@@ -22,9 +22,9 @@ YouTube-Kanal nutze:
 
 ## Was drin ist
 
-- 2 n8n-Workflows (JSON, direkt importierbar)
+- 2 n8n-Workflows (JSON, direkt importierbar), **auf Deutsch und Englisch**
 - Google-Sheet-Vorlage für deine Themenliste
-- Schritt-für-Schritt-Anleitung auf Deutsch (ca. 15–20 Minuten Einrichtung)
+- Schritt-für-Schritt-Anleitung auf Deutsch und Englisch (ca. 15–20 Minuten Einrichtung)
 - Abschnitt zum Anpassen: Sprache, Videolänge, Struktur, Stimme, Zeitplan
 
 ## Warum mit Freigabe-Schritt?
@@ -57,3 +57,5 @@ beginnt, und nimmst zur Kenntnis, dass dein Widerrufsrecht damit erlischt.*
 
 Wie die Pipeline im Detail funktioniert, steht im Artikel
 [YouTube-Skripte automatisch erstellen mit n8n, Claude und ElevenLabs]({{ site.baseurl }}/2026/10/30/youtube-skripte-automatisch-n8n-claude-elevenlabs/).
+
+*[English version of this page]({{ site.baseurl }}/en/n8n-youtube-pipeline-template/)*
