@@ -10,3 +10,7 @@ plugins:
 show_excerpts: true
 permalink: /:year/:month/:day/:title/
 future: true
+header_pages:
+  - vorlagen/n8n-youtube-pipeline.md
+  - impressum.md
+  - datenschutz.md
