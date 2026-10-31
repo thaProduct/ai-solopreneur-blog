@@ -1,0 +1,7 @@
+{
+  "name": "MonetizationKit",
+  "emitLegacyScripts": false,
+  "tree": {
+    "$path": "src"
+  }
+}
