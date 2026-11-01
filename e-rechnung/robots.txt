@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://xrechnung-kostenlos.com/sitemap.xml
+Sitemap: https://thaproduct.github.io/ai-solopreneur-blog/e-rechnung/sitemap.xml
