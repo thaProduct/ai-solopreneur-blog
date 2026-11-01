@@ -3,15 +3,21 @@ description: >-
   Praktische Anleitungen und Vergleiche zu KI-Tools und Automatisierung
   fuer Solopreneure und kleine Teams.
 baseurl: "/ai-solopreneur-blog"
-url: ""
+url: "https://thaproduct.github.io"
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 show_excerpts: true
 permalink: /:year/:month/:day/:title/
 future: true
 header_pages:
+  - kostenlos.md
   - vorlagen/n8n-youtube-pipeline.md
   - en/n8n-youtube-pipeline-template.md
   - impressum.md
   - datenschutz.md
+exclude:
+  - geschaeft/
+  - README.md
