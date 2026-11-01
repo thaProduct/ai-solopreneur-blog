@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XRechnung öffnen &amp; erstellen – kostenlos, ohne Anmeldung | E-Rechnung im Browser</title>
+<meta name="description" content="XRechnung und ZUGFeRD-XML kostenlos öffnen, lesen und als PDF drucken. Eigene XRechnung (3.0, UBL) erstellen – unbegrenzt, ohne Anmeldung. Deine Daten verlassen nie deinen Browser.">
+<link rel="canonical" href="https://thaproduct.github.io/ai-solopreneur-blog/e-rechnung/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"E-Rechnung im Browser","applicationCategory":"BusinessApplication","operatingSystem":"Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"XRechnung öffnen, lesen und kostenlos erstellen – komplett im Browser."}
+</script>
+<style>
+:root{--b:#1d4ed8;--bg:#f8fafc;--line:#e2e8f0;--t:#0f172a;--m:#64748b}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--t);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line)}.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}.logo{font-weight:700}.logo span{color:var(--b)}
+h1{font-size:2rem;line-height:1.2;margin:32px 0 8px}.lead{color:var(--m);margin:0 0 24px;font-size:1.1rem}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.badges span{background:#e0e7ff;color:#1e3a8a;border-radius:99px;padding:2px 12px;font-size:.9rem}
+.tabs{display:flex;gap:4px}.tabs button{border:1px solid var(--line);border-bottom:none;background:#eef2f7;padding:10px 18px;border-radius:8px 8px 0 0;font:inherit;cursor:pointer}
+.tabs button.on{background:#fff;font-weight:600}.panel{background:#fff;border:1px solid var(--line);border-radius:0 8px 8px 8px;padding:20px;margin-bottom:32px}
+.drop{border:2px dashed #93c5fd;border-radius:8px;padding:40px;text-align:center;color:var(--m);cursor:pointer}.drop.hover{background:#eff6ff}
+.btn{background:var(--b);color:#fff;border:0;border-radius:6px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer}.btn.sec{background:#fff;color:var(--b);border:1px solid var(--b)}
+fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 16px;padding:12px 16px}legend{font-weight:600;padding:0 6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}label{display:block;font-size:.85rem;color:var(--m)}
+input,select,textarea{width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;font:inherit;color:var(--t)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td.n,th.n{text-align:right}
+.lines td input{padding:6px}.err{background:#fef2f2;color:#991b1b;border-radius:6px;padding:10px;margin:10px 0}.ok{background:#f0fdf4;color:#166534;border-radius:6px;padding:10px;margin:10px 0}
+.inv{border:1px solid var(--line);border-radius:8px;padding:24px;margin-top:16px}.inv h2{margin-top:0}.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}.muted{color:var(--m);font-size:.9rem}
+.tot td{border:none;padding:2px 6px}.tot tr:last-child td{font-weight:700;border-top:2px solid var(--t)}
+.cta{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:24px 0}
+.faq h3{margin-bottom:4px}footer{color:var(--m);font-size:.9rem;padding:24px 0;border-top:1px solid var(--line)}footer a{color:var(--m)}
+@media print{header,.tabs,.no-print,footer,.seo,.cta{display:none!important}.panel{border:none;padding:0}.inv{border:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo">E-Rechnung <span>im Browser</span></div><a href="#faq" class="muted">Fragen &amp; Antworten</a></div></header>
+<main class="wrap">
+<div class="no-print">
+<h1>XRechnung öffnen und erstellen – kostenlos</h1>
+<p class="lead">E-Rechnungen (XRechnung, ZUGFeRD-XML) lesbar machen und als PDF drucken. Eigene XRechnung erstellen, ohne Software und ohne Anmeldung.</p>
+<div class="badges"><span>🔒 Daten bleiben in deinem Browser</span><span>∞ unbegrenzt kostenlos</span><span>XRechnung 3.0 (UBL)</span><span>Kleinunternehmer-tauglich</span></div>
+<div class="tabs"><button id="t-view" class="on" onclick="tab('view')">📄 Rechnung öffnen</button><button id="t-make" onclick="tab('make')">✏️ Rechnung erstellen</button></div>
+</div>
+
+<section class="panel" id="p-view">
+  <div class="no-print">
+    <div class="drop" id="drop">XML-Datei hierher ziehen oder <u>klicken zum Auswählen</u><br><span class="muted">XRechnung (UBL oder CII) und ZUGFeRD-/Factur-X-XML</span></div>
+    <input type="file" id="file" accept=".xml,text/xml,application/xml" hidden>
+  </div>
+  <div id="view-out"></div>
+</section>
+
+<section class="panel" id="p-make" hidden>
+ <form id="f" class="no-print" onsubmit="return false">
+  <fieldset><legend>Deine Daten (werden lokal gespeichert)</legend><div class="grid">
+   <div><label>Firma / Name*</label><input name="sName" required></div>
+   <div><label>Straße und Nr.*</label><input name="sStreet" required></div>
+   <div><label>PLZ*</label><input name="sZip" required></div>
+   <div><label>Ort*</label><input name="sCity" required></div>
+   <div><label>USt-IdNr. oder Steuernummer*</label><input name="sTax" required placeholder="DE123456789 oder 12/345/67890"></div>
+   <div><label>Ansprechpartner*</label><input name="sContact" required></div>
+   <div><label>Telefon*</label><input name="sPhone" required></div>
+   <div><label>E-Mail*</label><input name="sMail" type="email" required></div>
+   <div><label>IBAN*</label><input name="sIban" required></div>
+   <div><label>Kontoinhaber</label><input name="sAccName"></div>
+  </div></fieldset>
+  <fieldset><legend>Kunde</legend><div class="grid">
+   <div><label>Firma / Name*</label><input name="bName" required></div>
+   <div><label>Straße und Nr.*</label><input name="bStreet" required></div>
+   <div><label>PLZ*</label><input name="bZip" required></div>
+   <div><label>Ort*</label><input name="bCity" required></div>
+   <div><label>Land</label><input name="bCountry" value="DE" maxlength="2"></div>
+   <div><label>E-Mail des Kunden*</label><input name="bMail" type="email" required></div>
+   <div><label>Leitweg-ID / Käuferreferenz</label><input name="bRef" placeholder="bei Behörden Pflicht"></div>
+   <div><label>USt-IdNr. des Kunden</label><input name="bVat"></div>
+  </div></fieldset>
+  <fieldset><legend>Rechnung</legend><div class="grid">
+   <div><label>Rechnungsnummer*</label><input name="no" required></div>
+   <div><label>Rechnungsdatum*</label><input name="date" type="date" required></div>
+   <div><label>Fällig am*</label><input name="due" type="date" required></div>
+   <div><label>Leistungsdatum</label><input name="deliv" type="date"></div>
+   <div><label>Umsatzsteuer</label><select name="taxMode"><option value="S">Regelbesteuerung</option><option value="E">Kleinunternehmer (§ 19 UStG)</option></select></div>
+  </div>
+  <table class="lines" style="margin-top:12px"><thead><tr><th>Beschreibung</th><th style="width:90px">Menge</th><th style="width:120px">Einheit</th><th style="width:120px">Einzelpreis netto</th><th style="width:90px" class="vat">USt %</th><th></th></tr></thead><tbody id="lines"></tbody></table>
+  <p><button type="button" class="btn sec" onclick="addLine()">+ Position</button></p>
+  <label>Hinweis / Zahlungsbedingungen</label><textarea name="note" rows="2">Zahlbar ohne Abzug bis zum Fälligkeitsdatum.</textarea>
+  </fieldset>
+  <div id="make-msg"></div>
+  <p><button type="button" class="btn" onclick="make()">XRechnung erstellen &amp; herunterladen</button></p>
+ </form>
+ <div id="make-out"></div>
+</section>
+
+<div class="cta no-print" id="cta">
+ <strong>Mehr als ein paar Rechnungen im Monat?</strong> Für Angebote, Mahnungen, Kundenstamm und die Übergabe an deine Steuerberatung lohnt sich eine Buchhaltungssoftware mit E-Rechnung, z. B.
+ <a href="https://www.lexware.de/office/" rel="sponsored noopener" target="_blank" data-aff="lexware">Lexware Office</a> oder
+ <a href="https://sevdesk.de/" rel="sponsored noopener" target="_blank" data-aff="sevdesk">sevDesk</a>.
+</div>
+
+<section class="seo faq no-print" id="faq">
+<h2>Fragen &amp; Antworten zur E-Rechnung</h2>
+<h3>Wie öffne ich eine XRechnung?</h3>
+<p>Eine XRechnung ist eine XML-Datei und für Menschen kaum lesbar. Zieh die Datei oben in das Feld „Rechnung öffnen“. Du siehst die Rechnung sofort übersichtlich und kannst sie über „Drucken / PDF“ ablegen. Die Datei wird dabei nicht hochgeladen.</p>
+<h3>Muss ich E-Rechnungen empfangen können?</h3>
+<p>Ja. Seit dem 1. Januar 2025 müssen alle Unternehmen in Deutschland E-Rechnungen von anderen Unternehmen empfangen können, auch Kleinunternehmer. Ein E-Mail-Postfach reicht als Empfangsweg.</p>
+<h3>Ab wann muss ich selbst E-Rechnungen schreiben?</h3>
+<p>Unternehmen mit mehr als 800.000 € Vorjahresumsatz ab dem 1. Januar 2027, alle übrigen ab dem 1. Januar 2028. Für Kleinunternehmer nach § 19 UStG gibt es Sonderregeln. Prüfe deinen Fall mit deiner Steuerberatung.</p>
+<h3>Ist ein PDF eine E-Rechnung?</h3>
+<p>Nein. Eine E-Rechnung muss in einem strukturierten Format vorliegen (XRechnung oder ZUGFeRD ab Profil EN16931). Ein normales PDF zählt ab der Pflicht als „sonstige Rechnung“.</p>
+<h3>Ist das Tool wirklich kostenlos?</h3>
+<p>Ja, Öffnen und Erstellen sind unbegrenzt kostenlos. Es gibt kein Konto und keine Datenbank. Deine Absenderdaten speichert nur dein eigener Browser, damit du sie nicht jedes Mal neu eingeben musst.</p>
+<h3>Was kann das Tool (noch) nicht?</h3>
+<p>ZUGFeRD-PDFs mit eingebettetem XML werden derzeit nicht direkt geöffnet. Nutze dafür die XML-Datei aus dem Anhang. Erstellt wird XRechnung 3.0 im UBL-Format. Rabatte, Abschlagsrechnungen und Gutschriften werden noch nicht unterstützt.</p>
+</section>
+</main>
+<footer><div class="wrap">Keine Steuer- oder Rechtsberatung. Alle Angaben ohne Gewähr. · <a href="/ai-solopreneur-blog/impressum/">Impressum</a> · <a href="/ai-solopreneur-blog/datenschutz/">Datenschutz</a></div></footer>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eur=(v,c='EUR')=>{const n=Number(v);return isNaN(n)?esc(v):n.toLocaleString('de-DE',{style:'currency',currency:c||'EUR'})};
+const fmtDate=d=>{if(!d)return'';d=String(d).trim();if(/^\d{8}$/.test(d))d=d.slice(0,4)+'-'+d.slice(4,6)+'-'+d.slice(6);const p=d.split('-');return p.length===3?`${p[2]}.${p[1]}.${p[0]}`:d};
+function tab(t){for(const x of['view','make']){$('#p-'+x).hidden=x!==t;$('#t-'+x).classList.toggle('on',x===t)}}
+
+/* ---------- Viewer ---------- */
+const kids=(el,n)=>el?[...el.children].filter(c=>c.localName===n):[];
+const ch=(el,...path)=>{for(const n of path){el=kids(el,n)[0];if(!el)return null}return el};
+const tx=(el,...path)=>{const e=path.length?ch(el,...path):el;return e?e.textContent.trim():''};
+const any=(el,n)=>el?el.getElementsByTagNameNS('*',n)[0]||null:null;
+
+function parseUBL(r){
+  const party=p=>{p=ch(p,'Party');const a=ch(p,'PostalAddress');return{
+    name:tx(p,'PartyLegalEntity','RegistrationName')||tx(p,'PartyName','Name'),
+    addr:[tx(a,'StreetName'),tx(a,'AdditionalStreetName'),[tx(a,'PostalZone'),tx(a,'CityName')].join(' ').trim(),tx(a,'Country','IdentificationCode')].filter(Boolean),
+    tax:kids(p,'PartyTaxScheme').map(t=>tx(t,'CompanyID')).filter(Boolean),
+    contact:[tx(p,'Contact','Name'),tx(p,'Contact','Telephone'),tx(p,'Contact','ElectronicMail')].filter(Boolean)}};
+  const credit=r.localName==='CreditNote';
+  const lines=kids(r,credit?'CreditNoteLine':'InvoiceLine').map(l=>({id:tx(l,'ID'),name:tx(l,'Item','Name'),desc:tx(l,'Item','Description'),
+    qty:tx(l,credit?'CreditedQuantity':'InvoicedQuantity'),unit:(ch(l,credit?'CreditedQuantity':'InvoicedQuantity')||{getAttribute:()=>''}).getAttribute('unitCode'),
+    price:tx(l,'Price','PriceAmount'),net:tx(l,'LineExtensionAmount'),vat:tx(l,'Item','ClassifiedTaxCategory','Percent')}));
+  const m=ch(r,'LegalMonetaryTotal');const pm=ch(r,'PaymentMeans');
+  return{format:'XRechnung / UBL'+(credit?' (Gutschrift)':''),no:tx(r,'ID'),date:tx(r,'IssueDate'),due:tx(r,'DueDate')||tx(r,'PaymentMeans','PaymentDueDate'),
+    cur:tx(r,'DocumentCurrencyCode'),ref:tx(r,'BuyerReference'),seller:party(ch(r,'AccountingSupplierParty')),buyer:party(ch(r,'AccountingCustomerParty')),
+    lines,net:tx(m,'TaxExclusiveAmount'),tax:tx(r,'TaxTotal','TaxAmount'),gross:tx(m,'TaxInclusiveAmount'),pay:tx(m,'PayableAmount'),
+    iban:tx(pm,'PayeeFinancialAccount','ID'),terms:tx(r,'PaymentTerms','Note'),notes:kids(r,'Note').map(n=>n.textContent.trim())};
+}
+function parseCII(r){
+  const doc=ch(r,'ExchangedDocument'),tr=ch(r,'SupplyChainTradeTransaction'),ag=ch(tr,'ApplicableHeaderTradeAgreement'),st=ch(tr,'ApplicableHeaderTradeSettlement');
+  const party=p=>{const a=ch(p,'PostalTradeAddress');const c=ch(p,'DefinedTradeContact');return{name:tx(p,'Name'),
+    addr:[tx(a,'LineOne'),tx(a,'LineTwo'),[tx(a,'PostcodeCode'),tx(a,'CityName')].join(' ').trim(),tx(a,'CountryID')].filter(Boolean),
+    tax:kids(p,'SpecifiedTaxRegistration').map(t=>tx(t,'ID')).filter(Boolean),
+    contact:[tx(c,'PersonName'),tx(c,'TelephoneUniversalCommunication','CompleteNumber'),tx(c,'EmailURIUniversalCommunication','URIID')].filter(Boolean)}};
+  const lines=kids(tr,'IncludedSupplyChainTradeLineItem').map(l=>{const q=ch(l,'SpecifiedLineTradeDelivery','BilledQuantity');return{
+    id:tx(l,'AssociatedDocumentLineDocument','LineID'),name:tx(l,'SpecifiedTradeProduct','Name'),desc:tx(l,'SpecifiedTradeProduct','Description'),
+    qty:q?q.textContent.trim():'',unit:q?q.getAttribute('unitCode'):'',price:tx(l,'SpecifiedLineTradeAgreement','NetPriceProductTradePrice','ChargeAmount'),
+    net:tx(l,'SpecifiedLineTradeSettlement','SpecifiedTradeSettlementLineMonetarySummation','LineTotalAmount'),
+    vat:tx(l,'SpecifiedLineTradeSettlement','ApplicableTradeTax','RateApplicablePercent')}});
+  const sum=ch(st,'SpecifiedTradeSettlementHeaderMonetarySummation');
+  return{format:'ZUGFeRD / Factur-X / XRechnung (CII)',no:tx(doc,'ID'),date:tx(doc,'IssueDateTime','DateTimeString'),
+    due:tx(st,'SpecifiedTradePaymentTerms','DueDateDateTime','DateTimeString'),cur:tx(st,'InvoiceCurrencyCode'),ref:tx(ag,'BuyerReference'),
+    seller:party(ch(ag,'SellerTradeParty')),buyer:party(ch(ag,'BuyerTradeParty')),lines,
+    net:tx(sum,'TaxBasisTotalAmount'),tax:kids(sum,'TaxTotalAmount').map(e=>e.textContent.trim())[0]||'',gross:tx(sum,'GrandTotalAmount'),pay:tx(sum,'DuePayableAmount'),
+    iban:tx(any(st,'PayeePartyCreditorFinancialAccount'),'IBANID'),terms:tx(st,'SpecifiedTradePaymentTerms','Description'),
+    notes:kids(doc,'IncludedNote').map(n=>tx(n,'Content'))};
+}
+const UNITS={H87:'Stück',C62:'Stück',HUR:'Std.',DAY:'Tag',MON:'Monat',LS:'pauschal',KGM:'kg',MTR:'m',KMT:'km',XPP:'Stück',LTR:'l',MIN:'Min.',WEE:'Woche',ANN:'Jahr'};
+function render(i){
+  const p=x=>`<strong>${esc(x.name)}</strong><br>${x.addr.map(esc).join('<br>')}${x.tax.length?'<br><span class="muted">'+x.tax.map(esc).join(', ')+'</span>':''}${x.contact.length?'<br><span class="muted">'+x.contact.map(esc).join(' · ')+'</span>':''}`;
+  return `<div class="inv"><p class="muted">${esc(i.format)}</p><h2>Rechnung ${esc(i.no)}</h2>
+  <div class="cols"><div><span class="muted">Von</span><br>${p(i.seller)}</div><div><span class="muted">An</span><br>${p(i.buyer)}</div></div>
+  <p>Rechnungsdatum: <strong>${fmtDate(i.date)}</strong>${i.due?` · Fällig: <strong>${fmtDate(i.due)}</strong>`:''}${i.ref?` · Käuferreferenz: ${esc(i.ref)}`:''}</p>
+  <table><thead><tr><th>#</th><th>Position</th><th class="n">Menge</th><th class="n">Einzelpreis</th><th class="n">USt</th><th class="n">Netto</th></tr></thead><tbody>
+  ${i.lines.map(l=>`<tr><td>${esc(l.id)}</td><td>${esc(l.name)}${l.desc?'<br><span class="muted">'+esc(l.desc)+'</span>':''}</td><td class="n">${esc(Number(l.qty).toLocaleString('de-DE'))} ${esc(UNITS[l.unit]||l.unit)}</td><td class="n">${eur(l.price,i.cur)}</td><td class="n">${l.vat!==''?esc(l.vat)+' %':''}</td><td class="n">${eur(l.net,i.cur)}</td></tr>`).join('')}
+  </tbody></table>
+  <table class="tot" style="width:auto;margin:12px 0 0 auto"><tr><td>Netto</td><td class="n">${eur(i.net,i.cur)}</td></tr><tr><td>Umsatzsteuer</td><td class="n">${eur(i.tax||0,i.cur)}</td></tr><tr><td>Brutto</td><td class="n">${eur(i.gross,i.cur)}</td></tr>${i.pay&&i.pay!==i.gross?`<tr><td>Zahlbetrag</td><td class="n">${eur(i.pay,i.cur)}</td></tr>`:''}</table>
+  ${i.iban?`<p>Zahlung an IBAN: <strong>${esc(i.iban)}</strong></p>`:''}${i.terms?`<p>${esc(i.terms)}</p>`:''}${i.notes.filter(Boolean).map(n=>`<p class="muted">${esc(n)}</p>`).join('')}
+  </div><p class="no-print"><button class="btn" onclick="print()">Drucken / als PDF speichern</button></p>`;
+}
+function showXml(text,target){
+  const out=$(target);
+  const d=new DOMParser().parseFromString(text,'application/xml');
+  if(d.getElementsByTagName('parsererror').length){out.innerHTML='<div class="err">Die Datei ist kein gültiges XML. Ist es vielleicht ein PDF? Dann nutze die angehängte XML-Datei.</div>';return}
+  const r=d.documentElement;
+  try{
+    if(r.localName==='Invoice'||r.localName==='CreditNote')out.innerHTML=render(parseUBL(r));
+    else if(r.localName==='CrossIndustryInvoice')out.innerHTML=render(parseCII(r));
+    else out.innerHTML=`<div class="err">Unbekanntes Format (&lt;${esc(r.localName)}&gt;). Unterstützt werden XRechnung (UBL/CII) und ZUGFeRD/Factur-X.</div>`;
+  }catch(e){out.innerHTML='<div class="err">Die Rechnung konnte nicht gelesen werden: '+esc(e.message)+'</div>'}
+}
+const drop=$('#drop'),file=$('#file');
+drop.onclick=()=>file.click();
+file.onchange=()=>file.files[0]&&file.files[0].text().then(t=>showXml(t,'#view-out'));
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('hover')};drop.ondragleave=()=>drop.classList.remove('hover');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('hover');const f=e.dataTransfer.files[0];f&&f.text().then(t=>showXml(t,'#view-out'))};
+
+/* ---------- Creator ---------- */
+const F=$('#f');const SELLER=['sName','sStreet','sZip','sCity','sTax','sContact','sPhone','sMail','sIban','sAccName'];
+function addLine(v={}){const tr=document.createElement('tr');tr.innerHTML=`<td><input class="l-name" value="${esc(v.name||'')}" placeholder="z. B. Webdesign"></td><td><input class="l-qty" type="number" step="any" value="${v.qty??1}"></td><td><select class="l-unit">${Object.entries({HUR:'Stunde',H87:'Stück',DAY:'Tag',MON:'Monat',LS:'pauschal',KMT:'km'}).map(([k,n])=>`<option value="${k}">${n}</option>`).join('')}</select></td><td><input class="l-price" type="number" step="0.01" value="${v.price??''}"></td><td class="vat"><select class="l-vat"><option>19</option><option>7</option><option>0</option></select></td><td><button type="button" class="btn sec" onclick="this.closest('tr').remove()">×</button></td>`;$('#lines').append(tr)}
+function syncTaxMode(){const k=F.taxMode.value==='E';document.querySelectorAll('.vat').forEach(e=>e.style.display=k?'none':'')}
+F.taxMode.onchange=syncTaxMode;
+const r2=n=>Math.round((n+Number.EPSILON)*100)/100,a2=n=>r2(n).toFixed(2);
+const x=s=>esc(String(s??'').trim());
+function make(){
+  const g=n=>F[n].value.trim();const msg=$('#make-msg');
+  const miss=[...F.querySelectorAll('[required]')].filter(i=>!i.value.trim()).map(i=>i.previousElementSibling.textContent.replace('*',''));
+  const lines=[...document.querySelectorAll('#lines tr')].map(tr=>({name:tr.querySelector('.l-name').value.trim(),qty:parseFloat(tr.querySelector('.l-qty').value),unit:tr.querySelector('.l-unit').value,price:parseFloat(tr.querySelector('.l-price').value),vat:F.taxMode.value==='E'?0:parseFloat(tr.querySelector('.l-vat').value)})).filter(l=>l.name||!isNaN(l.price));
+  if(!lines.length)miss.push('mindestens eine Position');
+  if(lines.some(l=>!l.name||isNaN(l.qty)||isNaN(l.price)))miss.push('Beschreibung, Menge und Preis jeder Position');
+  if(g('due')&&g('date')&&g('due')<g('date'))miss.push('Fälligkeit nach dem Rechnungsdatum');
+  if(miss.length){msg.innerHTML='<div class="err">Bitte ergänzen: '+miss.map(esc).join(', ')+'</div>';return}
+  localStorage.setItem('erech-seller',JSON.stringify(Object.fromEntries(SELLER.map(n=>[n,F[n].value]))));
+  const small=F.taxMode.value==='E',cat=v=>small?'E':(v===0?'Z':'S');
+  lines.forEach(l=>l.net=r2(l.qty*l.price));
+  const groups={};lines.forEach(l=>{const k=cat(l.vat)+'|'+l.vat;(groups[k]=groups[k]||{cat:cat(l.vat),rate:l.vat,base:0}).base+=l.net});
+  Object.values(groups).forEach(t=>{t.base=r2(t.base);t.tax=r2(t.base*t.rate/100)});
+  const net=r2(lines.reduce((s,l)=>s+l.net,0)),tax=r2(Object.values(groups).reduce((s,t)=>s+t.tax,0)),gross=r2(net+tax);
+  const sTax=g('sTax').replace(/\s/g,''),isVat=/^[A-Z]{2}[0-9A-Z]{2,13}$/i.test(sTax);
+  const reasonE='Kein Ausweis von Umsatzsteuer, da Kleinunternehmer gemäß § 19 UStG';
+  const C='currencyID="EUR"';
+  const addr=(s,z,c,cc)=>`<cac:PostalAddress><cbc:StreetName>${x(s)}</cbc:StreetName><cbc:CityName>${x(c)}</cbc:CityName><cbc:PostalZone>${x(z)}</cbc:PostalZone><cac:Country><cbc:IdentificationCode>${x(cc||'DE').toUpperCase()}</cbc:IdentificationCode></cac:Country></cac:PostalAddress>`;
+  const xml=`<?xml version="1.0" encoding="UTF-8"?>
+<ubl:Invoice xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</cbc:CustomizationID>
+<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+<cbc:ID>${x(g('no'))}</cbc:ID>
+<cbc:IssueDate>${g('date')}</cbc:IssueDate>
+<cbc:DueDate>${g('due')}</cbc:DueDate>
+<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+${small?`<cbc:Note>${x(reasonE)}</cbc:Note>\n`:''}<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+<cbc:BuyerReference>${x(g('bRef')||g('no'))}</cbc:BuyerReference>
+<cac:AccountingSupplierParty><cac:Party>
+<cbc:EndpointID schemeID="EM">${x(g('sMail'))}</cbc:EndpointID>
+<cac:PartyName><cbc:Name>${x(g('sName'))}</cbc:Name></cac:PartyName>
+${addr(g('sStreet'),g('sZip'),g('sCity'),'DE')}
+<cac:PartyTaxScheme><cbc:CompanyID>${x(sTax)}</cbc:CompanyID><cac:TaxScheme><cbc:ID>${isVat?'VAT':'FC'}</cbc:ID></cac:TaxScheme></cac:PartyTaxScheme>
+<cac:PartyLegalEntity><cbc:RegistrationName>${x(g('sName'))}</cbc:RegistrationName></cac:PartyLegalEntity>
+<cac:Contact><cbc:Name>${x(g('sContact'))}</cbc:Name><cbc:Telephone>${x(g('sPhone'))}</cbc:Telephone><cbc:ElectronicMail>${x(g('sMail'))}</cbc:ElectronicMail></cac:Contact>
+</cac:Party></cac:AccountingSupplierParty>
+<cac:AccountingCustomerParty><cac:Party>
+<cbc:EndpointID schemeID="EM">${x(g('bMail'))}</cbc:EndpointID>
+<cac:PartyName><cbc:Name>${x(g('bName'))}</cbc:Name></cac:PartyName>
+${addr(g('bStreet'),g('bZip'),g('bCity'),g('bCountry'))}
+${g('bVat')?`<cac:PartyTaxScheme><cbc:CompanyID>${x(g('bVat').replace(/\s/g,''))}</cbc:CompanyID><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:PartyTaxScheme>\n`:''}<cac:PartyLegalEntity><cbc:RegistrationName>${x(g('bName'))}</cbc:RegistrationName></cac:PartyLegalEntity>
+</cac:Party></cac:AccountingCustomerParty>
+${g('deliv')?`<cac:Delivery><cbc:ActualDeliveryDate>${g('deliv')}</cbc:ActualDeliveryDate></cac:Delivery>\n`:''}<cac:PaymentMeans><cbc:PaymentMeansCode>58</cbc:PaymentMeansCode><cac:PayeeFinancialAccount><cbc:ID>${x(g('sIban').replace(/\s/g,'').toUpperCase())}</cbc:ID>${g('sAccName')?`<cbc:Name>${x(g('sAccName'))}</cbc:Name>`:''}</cac:PayeeFinancialAccount></cac:PaymentMeans>
+${g('note')?`<cac:PaymentTerms><cbc:Note>${x(g('note'))}</cbc:Note></cac:PaymentTerms>\n`:''}<cac:TaxTotal><cbc:TaxAmount ${C}>${a2(tax)}</cbc:TaxAmount>
+${Object.values(groups).map(t=>`<cac:TaxSubtotal><cbc:TaxableAmount ${C}>${a2(t.base)}</cbc:TaxableAmount><cbc:TaxAmount ${C}>${a2(t.tax)}</cbc:TaxAmount><cac:TaxCategory><cbc:ID>${t.cat}</cbc:ID><cbc:Percent>${t.rate}</cbc:Percent>${t.cat==='E'?`<cbc:TaxExemptionReason>${x(reasonE)}</cbc:TaxExemptionReason>`:''}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:TaxCategory></cac:TaxSubtotal>`).join('\n')}
+</cac:TaxTotal>
+<cac:LegalMonetaryTotal><cbc:LineExtensionAmount ${C}>${a2(net)}</cbc:LineExtensionAmount><cbc:TaxExclusiveAmount ${C}>${a2(net)}</cbc:TaxExclusiveAmount><cbc:TaxInclusiveAmount ${C}>${a2(gross)}</cbc:TaxInclusiveAmount><cbc:PayableAmount ${C}>${a2(gross)}</cbc:PayableAmount></cac:LegalMonetaryTotal>
+${lines.map((l,i)=>`<cac:InvoiceLine><cbc:ID>${i+1}</cbc:ID><cbc:InvoicedQuantity unitCode="${l.unit}">${l.qty}</cbc:InvoicedQuantity><cbc:LineExtensionAmount ${C}>${a2(l.net)}</cbc:LineExtensionAmount><cac:Item><cbc:Name>${x(l.name)}</cbc:Name><cac:ClassifiedTaxCategory><cbc:ID>${cat(l.vat)}</cbc:ID><cbc:Percent>${l.vat}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory></cac:Item><cac:Price><cbc:PriceAmount ${C}>${a2(l.price)}</cbc:PriceAmount></cac:Price></cac:InvoiceLine>`).join('\n')}
+</ubl:Invoice>`;
+  const blob=new Blob([xml],{type:'application/xml'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=`XRechnung_${g('no').replace(/[^\w.-]+/g,'_')}.xml`;document.body.append(a);a.click();a.remove();
+  msg.innerHTML='<div class="ok">✓ XRechnung erstellt und heruntergeladen. Schick die XML-Datei per E-Mail an deinen Kunden. Unten siehst du die lesbare Ansicht zum Drucken.</div>';
+  showXml(xml,'#make-out');window.lastXml=xml;
+}
+(function init(){
+  try{const s=JSON.parse(localStorage.getItem('erech-seller')||'{}');SELLER.forEach(n=>{if(s[n])F[n].value=s[n]})}catch(e){}
+  const t=new Date(),iso=d=>d.toISOString().slice(0,10);F.date.value=iso(t);F.due.value=iso(new Date(t.getTime()+14*864e5));
+  addLine();syncTaxMode();
+})();
+</script>
+</body>
+</html>
