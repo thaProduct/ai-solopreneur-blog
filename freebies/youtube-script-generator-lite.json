@@ -1,0 +1,194 @@
+{
+  "name": "YouTube Script Generator (Lite) - Claude",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## YouTube Script Generator (Lite)\nEnter a topic, get a structured faceless-video script (Hook, Setup, Facts, Theories, Ending) plus 5 title ideas.\n\n**Setup (3 min)**\n1. Create a *Header Auth* credential: Name `x-api-key`, Value = your Anthropic API key.\n2. Select it in the node **Claude: write script**.\n3. Activate the workflow and open the form URL.\n\n**Want the full pipeline?** Google Sheets topic queue, Telegram approval and ElevenLabs voice-over per section, saved to Google Drive:\nhttps://thaproduct.github.io/ai-solopreneur-blog/en/n8n-youtube-pipeline-template/",
+        "height": 420,
+        "width": 380
+      },
+      "id": "aa106c87-aae6-4721-8135-6e2bd875439a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "YouTube Script Generator",
+        "formDescription": "Topic in, finished script out.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Topic",
+              "requiredField": true,
+              "placeholder": "e.g. The disappearance of the Mary Celeste"
+            },
+            {
+              "fieldLabel": "Video length (minutes)",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "English"
+                  },
+                  {
+                    "option": "German"
+                  },
+                  {
+                    "option": "Spanish"
+                  },
+                  {
+                    "option": "French"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "73ec472d-99b9-4b76-ba05-947cca5c4aef",
+      "name": "Form: topic",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "b13ff31f-2550-4416-bd46-d32b5e5b33c8"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the request for the Anthropic Messages API from the form input.\nconst topic = $json['Topic'];\nconst minutes = Number($json['Video length (minutes)'] || 8);\nconst language = $json['Language'] || 'English';\nconst words = Math.round(minutes * 150); // ~150 spoken words per minute\n\nreturn [{ json: { topic, body: {\n  model: 'claude-sonnet-5-5',\n  max_tokens: 8000,\n  system: \"You are a scriptwriter for faceless YouTube channels. Write a complete, spoken-word video script. Use these sections, each starting with a line '## SECTION NAME': HOOK, SETUP, FACTS, THEORIES, ENDING. No stage directions, no emojis, no markdown except the section headers. After the script add a line '## TITLES' with 5 title ideas, one per line.\",\n  messages: [{ role: 'user', content:\n    `Topic: ${topic}\\nLanguage: ${language}\\nTarget length: about ${words} words (${minutes} minutes).` }]\n} } }];"
+      },
+      "id": "f08ecc78-210d-46f6-ba9a-b1db38701130",
+      "name": "Build prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "b07391cb-a640-4c26-845c-37c5cdffb3ae",
+      "name": "Claude: write script",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extracts the script text and counts words.\nconst text = ($json.content || []).filter(c => c.type === 'text').map(c => c.text).join('\\n');\nconst words = text.split(/\\s+/).filter(Boolean).length;\nreturn [{ json: { script: text, words, minutes: Math.round(words / 150) } }];"
+      },
+      "id": "0b89571d-b6ea-47a9-b785-b0b2421c1806",
+      "name": "Parse script",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "={{ $json.script }}\n\n---\n{{ $json.words }} words, about {{ $json.minutes }} minutes.\n\nAutomate the rest (topic queue, Telegram approval, ElevenLabs voice-over): https://thaproduct.github.io/ai-solopreneur-blog/en/n8n-youtube-pipeline-template/"
+      },
+      "id": "d0b810fd-5e00-4557-b6a1-41933c0ebca5",
+      "name": "Show script",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        880,
+        0
+      ],
+      "webhookId": "4f64a58d-91d0-4f81-9c36-4d7588a46299"
+    }
+  ],
+  "connections": {
+    "Form: topic": {
+      "main": [
+        [
+          {
+            "node": "Build prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build prompt": {
+      "main": [
+        [
+          {
+            "node": "Claude: write script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude: write script": {
+      "main": [
+        [
+          {
+            "node": "Parse script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse script": {
+      "main": [
+        [
+          {
+            "node": "Show script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

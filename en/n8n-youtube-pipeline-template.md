@@ -56,5 +56,7 @@ and acknowledge that you thereby lose your right of withdrawal.*
 Curious how it works under the hood? Read
 [How I automate YouTube scripts with n8n, Claude and ElevenLabs]({{ site.baseurl }}/en/youtube-script-automation-n8n-claude-elevenlabs/).
 
+Not sure yet? Try the [free Lite version]({{ site.baseurl }}/en/free-youtube-script-generator/) first.
+
 [Legal notice (Impressum)]({{ site.baseurl }}/impressum/) ·
 [Privacy policy (German)]({{ site.baseurl }}/datenschutz/)
