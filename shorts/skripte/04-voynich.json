@@ -41,7 +41,8 @@
   {
    "text": "Ist es eine verlorene Sprache, ein Geheimcode oder ein mittelalterlicher Scherz? Was glaubst du?",
    "query": "Voynich manuscript folio",
-   "pick_query": "Beinecke Rare Book Library"
+   "pick_query": "Beinecke Rare Book Library",
+   "reuse": true
   }
  ],
  "fallback": "Voynich manuscript"

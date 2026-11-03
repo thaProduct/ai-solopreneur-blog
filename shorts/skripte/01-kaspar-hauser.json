@@ -19,7 +19,8 @@
   },
   {
    "text": "Später erzählt er, er habe sein ganzes Leben in einem dunklen Verlies verbracht. Nur Wasser, Brot und ein Holzpferd.",
-   "query": "dungeon cell dark stone"
+   "query": "dungeon cell dark stone",
+   "reuse": true
   },
   {
    "text": "Schnell geht ein Gerücht um: Er sei der verschwundene Erbprinz von Baden.",
