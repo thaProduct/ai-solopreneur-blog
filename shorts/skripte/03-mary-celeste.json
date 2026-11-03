@@ -10,27 +10,27 @@
  "segments": [
   {
    "text": "Dezember 1872, mitten im Atlantik. Die Crew der Dei Gratia entdeckt ein Schiff, das führerlos über das Meer treibt: die Mary Celeste.",
-   "query": "Mary Celeste ship painting"
+   "query": "brigantine ship painting 19th century"
   },
   {
    "text": "An Bord: niemand. Zehn Menschen sind verschwunden, darunter der Kapitän, seine Frau und ihre zweijährige Tochter.",
-   "query": "Benjamin Briggs captain"
+   "query": "sailing ship atlantic painting"
   },
   {
    "text": "Essen und Wasser für sechs Monate sind noch da. Das Rettungsboot aber fehlt.",
-   "query": "Mary Celeste"
+   "query": "empty ship deck"
   },
   {
    "text": "Die Ladung: über siebzehnhundert Fässer Industriealkohol. Neun davon sind leer.",
-   "query": "Dei Gratia brigantine"
+   "query": "whiskey barrels old"
   },
   {
    "text": "Eine Theorie: Alkoholdämpfe. Aus Angst vor einer Explosion flieht die Crew ins Rettungsboot. Und das Seil reißt.",
-   "query": "Mary Celeste engraving"
+   "query": "ship lifeboat painting"
   },
   {
    "text": "Bewiesen ist das nicht. Von den zehn Menschen fehlt bis heute jede Spur.",
-   "query": "Mary Celeste 1872"
+   "query": "stormy sea painting"
   }
  ],
  "fallback": "sailing ship storm painting"

@@ -14,23 +14,23 @@
   },
   {
    "text": "Das Voynich-Manuskript. Rund zweihundertvierzig Seiten in einer Schrift, die es sonst nirgendwo auf der Welt gibt.",
-   "query": "Voynich manuscript text page"
+   "query": "Voynich 1916"
   },
   {
    "text": "Darin: Pflanzen, die kein Botaniker kennt. Sternkarten. Und Frauen, die in grünen Becken baden.",
-   "query": "Voynich manuscript plants"
+   "query": "Voynich plants"
   },
   {
    "text": "Die Radiokarbon-Datierung zeigt: Das Pergament stammt aus dem frühen fünfzehnten Jahrhundert.",
-   "query": "Voynich manuscript astronomical"
+   "query": "Voynich astronomical"
   },
   {
    "text": "Selbst die besten Codeknacker des Zweiten Weltkriegs sind daran gescheitert.",
-   "query": "Voynich manuscript biological"
+   "query": "Voynich"
   },
   {
    "text": "Ist es eine verlorene Sprache, ein Geheimcode oder ein mittelalterlicher Scherz? Was glaubst du?",
-   "query": "Voynich manuscript folio"
+   "query": "medieval manuscript page"
   }
  ],
  "fallback": "Voynich manuscript"

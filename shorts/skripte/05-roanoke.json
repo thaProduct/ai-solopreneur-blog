@@ -10,15 +10,15 @@
  "segments": [
   {
    "text": "1587 gründen über hundert Engländer auf der Insel Roanoke eine Kolonie in der Neuen Welt.",
-   "query": "Roanoke colony"
+   "query": "Fort Raleigh Roanoke"
   },
   {
    "text": "Gouverneur John White segelt zurück nach England, um Vorräte zu holen. Wegen eines Krieges mit Spanien kommt er erst drei Jahre später wieder.",
-   "query": "John White Roanoke"
+   "query": "Elizabethan ship engraving 16th century"
   },
   {
    "text": "Als er 1590 ankommt, ist die Siedlung verlassen. Keine Menschen, keine Gräber, keine Spuren eines Kampfes.",
-   "query": "Roanoke Island 1590"
+   "query": "Roanoke Island"
   },
   {
    "text": "Nur ein einziges Wort ist in einen Pfosten geritzt: Croatoan.",
@@ -26,11 +26,11 @@
   },
   {
    "text": "Unter den Verschwundenen: Whites eigene Enkelin Virginia Dare, das erste englische Kind, das in Amerika geboren wurde.",
-   "query": "Virginia Dare"
+   "query": "Roanoke Colony Marker"
   },
   {
    "text": "Was mit den Siedlern geschah, weiß bis heute niemand genau.",
-   "query": "Roanoke colony map"
+   "query": "Theodor de Bry engraving America"
   }
  ],
  "fallback": "Roanoke Island"

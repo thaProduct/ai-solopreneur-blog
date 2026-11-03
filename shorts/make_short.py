@@ -31,6 +31,8 @@ def get(url, tries=6, **kw):
         r = requests.get(url, headers=UA, timeout=60, **kw)
         if r.status_code == 200:
             return r
+        if r.status_code in (404, 410, 424):
+            break
         wait = min(int(r.headers.get("Retry-After", 0) or 0) or 5 * 2 ** attempt, 60)
         print(f"  {r.status_code} von {url[:60]}, warte {wait}s", file=sys.stderr)
         time.sleep(wait)
@@ -54,6 +56,21 @@ async def tts(text, mp3):
     return words
 
 
+def align(words, text):
+    """edge-tts liefert Wörter ohne Satzzeichen; Originalschreibweise wiederherstellen."""
+    toks, j, out = text.split(), 0, []
+    norm = lambda x: re.sub(r"\W", "", x).lower()
+    for a, b, w in words:
+        k = j
+        while k < len(toks) and not norm(toks[k]).startswith(norm(w)[:4] or "#"):
+            k += 1
+        if k < len(toks):
+            out.append((a, b, toks[k])); j = k + 1
+        else:
+            out.append((a, b, w))
+    return out
+
+
 def duration(path):
     out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                           "-of", "csv=p=0", str(path)], capture_output=True, text=True).stdout
@@ -69,7 +86,7 @@ def commons_images(query, used, limit=12):
     """Frei lizenzierte Bilder über Openverse (u. a. Wikimedia Commons, Flickr, Museen)."""
     r = get(OV, params={"q": query, "license": ",".join(LIC), "page_size": limit, "mature": "false"})
     for p in r.json().get("results", []):
-        if p["id"] in used or (p.get("width") or 0) < 500:
+        if p["id"] in used or (p.get("creator") or "?") in used or (p.get("width") or 0) < 500:
             continue
         lic = LIC.get(p["license"], p["license"]) + (" " + p["license_version"] if p.get("license_version") else "")
         yield {"title": p.get("title") or p["id"], "id": p["id"], "url": f"{OV}{p['id']}/thumb/?full_size=true",
@@ -83,7 +100,7 @@ def fetch_image(query, used, dest):
             data = get(cand["url"], tries=2).content
             dest.write_bytes(data)
             Image.open(dest).verify()
-            used.add(cand["id"])
+            used.add(cand["id"]); used.add(cand["artist"])
             return cand
         except Exception:
             continue
@@ -161,7 +178,7 @@ def main(script_path, out_dir):
     t0, last_img = 0.0, None
     for i, seg in enumerate(spec["segments"]):
         mp3 = tmp / f"s{i}.mp3"
-        words = asyncio.run(tts(seg["text"], mp3))
+        words = align(asyncio.run(tts(seg["text"], mp3)), seg["text"])
         d = duration(mp3) + GAP
         words_all += [(a + t0, b + t0, w) for a, b, w in words]
         audio_parts.append((mp3, d))

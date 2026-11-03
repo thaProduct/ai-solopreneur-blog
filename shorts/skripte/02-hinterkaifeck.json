@@ -10,27 +10,27 @@
  "segments": [
   {
    "text": "Bayern, Frühjahr 1922. Bauer Andreas Gruber entdeckt Fußspuren im Schnee. Sie führen zu seinem Hof. Aber keine führt wieder weg.",
-   "query": "Hinterkaifeck"
+   "query": "snow footprints night"
   },
   {
    "text": "Ein Hausschlüssel verschwindet. Auf dem Dachboden hört die Familie Schritte. Gruber durchsucht alles und findet niemanden.",
-   "query": "Hinterkaifeck Hof 1922"
+   "query": "old farmhouse winter Bavaria"
   },
   {
    "text": "In der Nacht zum ersten April sterben auf dem Einödhof Hinterkaifeck sechs Menschen. Darunter zwei Kinder und eine Magd, die erst am Tag zuvor angekommen war.",
-   "query": "Hinterkaifeck Opfer"
+   "query": "attic wooden beams dark"
   },
   {
    "text": "Das Unheimlichste: In den Tagen danach wurde das Vieh gefüttert. Und aus dem Kamin stieg Rauch.",
-   "query": "Waidhofen Oberbayern"
+   "query": "barn at night"
   },
   {
    "text": "Erst nach vier Tagen werden die Toten gefunden. Der Täter hat offenbar so lange auf dem Hof gelebt.",
-   "query": "Hinterkaifeck Marterl"
+   "query": "old farmhouse chimney smoke"
   },
   {
    "text": "Über hundert Jahre später ist der Fall bis heute ungelöst.",
-   "query": "Hinterkaifeck Gedenkstein"
+   "query": "wayside cross field Bavaria"
   }
  ],
  "fallback": "abandoned farmhouse night"

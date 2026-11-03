@@ -10,27 +10,27 @@
  "segments": [
   {
    "text": "Pfingstmontag 1828, Nürnberg. Auf dem Unschlittplatz steht ein Junge, etwa sechzehn Jahre alt. Er kann kaum sprechen und kaum gehen.",
-   "query": "Kaspar Hauser 1828"
+   "query": "Bildnis des Caspar Hauser"
   },
   {
    "text": "In der Hand hält er einen Brief. Gefragt nach seinem Namen, schreibt er nur zwei Wörter: Kaspar Hauser.",
-   "query": "Kaspar Hauser Brief"
+   "query": "Nuremberg old town 19th century engraving"
   },
   {
    "text": "Später erzählt er, er habe sein ganzes Leben in einem dunklen Verlies verbracht. Nur Wasser, Brot und ein Holzpferd.",
-   "query": "Kaspar Hauser Zeichnung"
+   "query": "dungeon cell dark stone"
   },
   {
    "text": "Schnell geht ein Gerücht um: Er sei der verschwundene Erbprinz von Baden.",
-   "query": "Großherzogtum Baden Karlsruhe Schloss 19. Jahrhundert"
+   "query": "Karlsruhe Schloss"
   },
   {
    "text": "Dezember 1833, Ansbach. Kaspar wird im Hofgarten niedergestochen und stirbt drei Tage später. Der Täter wird nie gefunden.",
-   "query": "Ansbach Hofgarten Kaspar Hauser Denkmal"
+   "query": "Ansbach Hofgarten"
   },
   {
    "text": "2024 untersuchten Forscher seine Haare. Ergebnis: Er war kein Prinz von Baden. Doch wer war er dann?",
-   "query": "Kaspar Hauser Grab Ansbach"
+   "query": "CASPAR HAUSER after 1833"
   }
  ],
  "fallback": "Nuremberg old town historic"
