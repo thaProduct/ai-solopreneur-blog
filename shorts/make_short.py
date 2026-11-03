@@ -94,8 +94,15 @@ def commons_images(query, used, limit=12):
                "page": p.get("foreign_landing_url", ""), "source": p.get("source", "")}
 
 
-def fetch_image(query, used, dest):
-    for cand in commons_images(query, used):
+def by_id(iid):
+    p = get(f"{OV}{iid}/").json()
+    lic = LIC.get(p["license"], p["license"]) + (" " + p["license_version"] if p.get("license_version") else "")
+    yield {"title": p.get("title") or iid, "id": iid, "url": f"{OV}{iid}/thumb/?full_size=true", "license": lic,
+           "artist": (p.get("creator") or "unbekannt")[:120], "page": p.get("foreign_landing_url", "")}
+
+
+def fetch_image(query, used, dest, iid=None):
+    for cand in (by_id(iid) if iid else commons_images(query, used)):
         try:
             data = get(cand["url"], tries=2).content
             dest.write_bytes(data)
@@ -183,8 +190,10 @@ def main(script_path, out_dir):
         words_all += [(a + t0, b + t0, w) for a, b, w in words]
         audio_parts.append((mp3, d))
         raw = tmp / f"raw{i}"
-        info = fetch_image(seg["query"], used, raw) or (spec.get("fallback") and fetch_image(spec["fallback"], used, raw))
-        if info:
+        info = None if seg.get("reuse") and last_img else (seg.get("image") and fetch_image(None, used, raw, seg["image"])) or fetch_image(seg["query"], used, raw) or (spec.get("fallback") and fetch_image(spec["fallback"], used, raw))
+        if seg.get("reuse") and last_img:
+            pass
+        elif info:
             credits.append(info)
             comp = tmp / f"img{i}.jpg"; compose(raw, comp); last_img = comp
         elif last_img is None:

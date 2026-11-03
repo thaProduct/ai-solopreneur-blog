@@ -14,7 +14,8 @@
   },
   {
    "text": "In der Hand hält er einen Brief. Gefragt nach seinem Namen, schreibt er nur zwei Wörter: Kaspar Hauser.",
-   "query": "Nuremberg old town 19th century engraving"
+   "query": "Nuremberg old town 19th century engraving",
+   "reuse": true
   },
   {
    "text": "Später erzählt er, er habe sein ganzes Leben in einem dunklen Verlies verbracht. Nur Wasser, Brot und ein Holzpferd.",

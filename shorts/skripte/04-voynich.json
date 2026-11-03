@@ -10,27 +10,38 @@
  "segments": [
   {
    "text": "Dieses Buch ist über sechshundert Jahre alt. Und bis heute kann es niemand lesen.",
-   "query": "Voynich manuscript"
+   "query": "Voynich manuscript",
+   "pick_query": "Voynich manuscript",
+   "image": "07613bba-c044-47e2-924b-1f9bafe844d1"
   },
   {
    "text": "Das Voynich-Manuskript. Rund zweihundertvierzig Seiten in einer Schrift, die es sonst nirgendwo auf der Welt gibt.",
-   "query": "Voynich 1916"
+   "query": "Voynich 1916",
+   "pick_query": "Voynich manuscript script",
+   "image": "27e37d4e-350b-4adf-8303-afba298a73e6"
   },
   {
    "text": "Darin: Pflanzen, die kein Botaniker kennt. Sternkarten. Und Frauen, die in grünen Becken baden.",
-   "query": "Voynich plants"
+   "query": "Voynich plants",
+   "pick_query": "Voynich manuscript botanical",
+   "image": "452398f3-63a1-4c78-b3ed-4c0d0846b4e9"
   },
   {
    "text": "Die Radiokarbon-Datierung zeigt: Das Pergament stammt aus dem frühen fünfzehnten Jahrhundert.",
-   "query": "Voynich astronomical"
+   "query": "Voynich astronomical",
+   "pick_query": "Voynich manuscript astronomical diagram",
+   "image": "96492326-0b98-448f-8b63-282d9b888297"
   },
   {
    "text": "Selbst die besten Codeknacker des Zweiten Weltkriegs sind daran gescheitert.",
-   "query": "Voynich"
+   "query": "Voynich",
+   "pick_query": "Voynich manuscript bathing",
+   "reuse": true
   },
   {
    "text": "Ist es eine verlorene Sprache, ein Geheimcode oder ein mittelalterlicher Scherz? Was glaubst du?",
-   "query": "medieval manuscript page"
+   "query": "Voynich manuscript folio",
+   "pick_query": "Beinecke Rare Book Library"
   }
  ],
  "fallback": "Voynich manuscript"

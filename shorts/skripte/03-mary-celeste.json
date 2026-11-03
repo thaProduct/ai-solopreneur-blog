@@ -18,7 +18,8 @@
   },
   {
    "text": "Essen und Wasser für sechs Monate sind noch da. Das Rettungsboot aber fehlt.",
-   "query": "empty ship deck"
+   "query": "empty ship deck",
+   "reuse": true
   },
   {
    "text": "Die Ladung: über siebzehnhundert Fässer Industriealkohol. Neun davon sind leer.",
