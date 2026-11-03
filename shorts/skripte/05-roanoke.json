@@ -1,0 +1,48 @@
+{
+ "title": "115 Menschen verschwunden – ein Wort blieb zurück #Roanoke",
+ "tags": [
+  "Roanoke",
+  "Croatoan",
+  "Rätsel",
+  "Geschichte",
+  "Mystery"
+ ],
+ "segments": [
+  {
+   "text": "1587 gründen über hundert Engländer auf der Insel Roanoke eine Kolonie in der Neuen Welt.",
+   "query": "Fort Raleigh Roanoke",
+   "pick_query": "Fort Raleigh National Historic Site",
+   "image": "48361fae-62e4-438d-805a-fb0c966e54b0"
+  },
+  {
+   "text": "Gouverneur John White segelt zurück nach England, um Vorräte zu holen. Wegen eines Krieges mit Spanien kommt er erst drei Jahre später wieder.",
+   "query": "Elizabethan ship engraving 16th century",
+   "pick_query": "Elizabethan galleon",
+   "image": "e2e47162-8909-4a67-82d4-62ebd768a6f2"
+  },
+  {
+   "text": "Als er 1590 ankommt, ist die Siedlung verlassen. Keine Menschen, keine Gräber, keine Spuren eines Kampfes.",
+   "query": "Roanoke Island",
+   "pick_query": "John White Indians watercolor",
+   "image": "afa935c7-a146-4e31-bdb4-0c5ef03ad77b"
+  },
+  {
+   "text": "Nur ein einziges Wort ist in einen Pfosten geritzt: Croatoan.",
+   "query": "Croatoan",
+   "pick_query": "CROATOAN tree carving",
+   "reuse": true
+  },
+  {
+   "text": "Unter den Verschwundenen: Whites eigene Enkelin Virginia Dare, das erste englische Kind, das in Amerika geboren wurde.",
+   "query": "Roanoke Colony Marker",
+   "pick_query": "Virginia Dare",
+   "image": "e6c11a9a-c390-446f-b24d-b253acebc2aa"
+  },
+  {
+   "text": "Was mit den Siedlern geschah, weiß bis heute niemand genau.",
+   "query": "Theodor de Bry engraving America",
+   "pick_query": "Americae pars nunc Virginia dicta map"
+  }
+ ],
+ "fallback": "Roanoke Island"
+}
