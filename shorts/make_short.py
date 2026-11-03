@@ -2,7 +2,7 @@
 """Erzeugt ein vertikales Kurzvideo (1080x1920) aus einem Skript-JSON.
 
 Ablauf: Sprachausgabe pro Abschnitt (edge-tts, Wort-Zeitstempel) ->
-frei lizenzierte Bilder von Wikimedia Commons -> Ken-Burns-Zoom ->
+frei lizenzierte Bilder über Openverse -> Ken-Burns-Zoom ->
 Untertitel (ASS, Wortgruppen) -> leiser, selbst erzeugter Klangteppich ->
 MP4 + Beschreibungstext mit Bildnachweisen.
 
@@ -19,19 +19,19 @@ W, H, FPS = 1080, 1920, 30
 VOICE, RATE = "de-DE-ConradNeural", "+6%"
 GAP = 0.25  # Pause zwischen Abschnitten (s)
 UA = {"User-Agent": "ShortsMaker/1.0 (https://github.com/thaProduct/ai-solopreneur-blog)"}
-API = "https://commons.wikimedia.org/w/api.php"
+
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc[- ]by)", re.I)
 FONT = "Inter Display"
 
 
-def get(url, **kw):
-    """GET mit Pausen und Wiederholung bei 429/5xx (Wikimedia-Regeln)."""
-    for attempt in range(6):
+def get(url, tries=6, **kw):
+    """GET mit Pausen und Wiederholung bei 429/5xx."""
+    for attempt in range(tries):
         time.sleep(1.0)
         r = requests.get(url, headers=UA, timeout=60, **kw)
         if r.status_code == 200:
             return r
-        wait = int(r.headers.get("Retry-After", 0) or 0) or 5 * 2 ** attempt
+        wait = min(int(r.headers.get("Retry-After", 0) or 0) or 5 * 2 ** attempt, 60)
         print(f"  {r.status_code} von {url[:60]}, warte {wait}s", file=sys.stderr)
         time.sleep(wait)
     r.raise_for_status()
@@ -61,32 +61,29 @@ def duration(path):
 
 
 # ---------- Bilder ----------
+OV = "https://api.openverse.org/v1/images/"
+LIC = {"pdm": "Public Domain", "cc0": "CC0", "by": "CC BY", "by-sa": "CC BY-SA"}
+
+
 def commons_images(query, used, limit=12):
-    r = get(API, params={
-        "action": "query", "format": "json", "generator": "search", "gsrsearch": query,
-        "gsrnamespace": 6, "gsrlimit": limit, "prop": "imageinfo",
-        "iiprop": "url|extmetadata|mime|size", "iiurlwidth": 1600})
-    pages = sorted(r.json().get("query", {}).get("pages", {}).values(), key=lambda p: p.get("index", 99))
-    for p in pages:
-        ii = (p.get("imageinfo") or [{}])[0]
-        meta = ii.get("extmetadata", {})
-        lic = meta.get("LicenseShortName", {}).get("value", "")
-        if ii.get("mime") not in ("image/jpeg", "image/png") or not OK_LICENSE.match(lic):
+    """Frei lizenzierte Bilder über Openverse (u. a. Wikimedia Commons, Flickr, Museen)."""
+    r = get(OV, params={"q": query, "license": ",".join(LIC), "page_size": limit, "mature": "false"})
+    for p in r.json().get("results", []):
+        if p["id"] in used or (p.get("width") or 0) < 500:
             continue
-        if ii.get("width", 0) < 500 or p["title"] in used:
-            continue
-        artist = re.sub(r"<[^>]+>", "", html.unescape(meta.get("Artist", {}).get("value", "unbekannt"))).strip()
-        yield {"title": p["title"], "url": ii.get("thumburl") or ii["url"], "license": lic,
-               "artist": artist[:120], "page": ii.get("descriptionurl", "")}
+        lic = LIC.get(p["license"], p["license"]) + (" " + p["license_version"] if p.get("license_version") else "")
+        yield {"title": p.get("title") or p["id"], "id": p["id"], "url": f"{OV}{p['id']}/thumb/?full_size=true",
+               "license": lic, "artist": (p.get("creator") or "unbekannt")[:120],
+               "page": p.get("foreign_landing_url", ""), "source": p.get("source", "")}
 
 
 def fetch_image(query, used, dest):
     for cand in commons_images(query, used):
         try:
-            data = get(cand["url"]).content
+            data = get(cand["url"], tries=2).content
             dest.write_bytes(data)
             Image.open(dest).verify()
-            used.add(cand["title"])
+            used.add(cand["id"])
             return cand
         except Exception:
             continue
@@ -169,7 +166,7 @@ def main(script_path, out_dir):
         words_all += [(a + t0, b + t0, w) for a, b, w in words]
         audio_parts.append((mp3, d))
         raw = tmp / f"raw{i}"
-        info = fetch_image(seg["query"], used, raw)
+        info = fetch_image(seg["query"], used, raw) or (spec.get("fallback") and fetch_image(spec["fallback"], used, raw))
         if info:
             credits.append(info)
             comp = tmp / f"img{i}.jpg"; compose(raw, comp); last_img = comp
@@ -204,8 +201,8 @@ def main(script_path, out_dir):
          "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
          "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)])
     # Beschreibung mit Bildnachweisen
-    desc = [spec["title"], "", " ".join("#" + t for t in spec.get("tags", [])), "", "Bildnachweise (Wikimedia Commons):"]
-    desc += [f"- {c['title'].removeprefix('File:')}: {c['artist']}, {c['license']}, {c['page']}" for c in credits]
+    desc = [spec["title"], "", " ".join("#" + t for t in spec.get("tags", [])), "", "Bildnachweise:"]
+    desc += [f"- „{c['title']}“ von {c['artist']}, {c['license']}, {c['page']}" for c in credits]
     desc += ["", "Stimme: KI-generiert."]
     (out_dir / f"{slug}.txt").write_text("\n".join(desc) + "\n", encoding="utf-8")
     print(f"{out}  {total:.1f}s  {len(credits)} Bilder")

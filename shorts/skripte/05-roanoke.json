@@ -1,9 +1,37 @@
-{"title":"115 Menschen verschwunden – ein Wort blieb zurück #Roanoke","tags":["Roanoke","Croatoan","Rätsel","Geschichte","Mystery"],
-"segments":[
-{"text":"1587 gründen über hundert Engländer auf der Insel Roanoke eine Kolonie in der Neuen Welt.","query":"Roanoke colony"},
-{"text":"Gouverneur John White segelt zurück nach England, um Vorräte zu holen. Wegen eines Krieges mit Spanien kommt er erst drei Jahre später wieder.","query":"John White Roanoke"},
-{"text":"Als er 1590 ankommt, ist die Siedlung verlassen. Keine Menschen, keine Gräber, keine Spuren eines Kampfes.","query":"Roanoke Island 1590"},
-{"text":"Nur ein einziges Wort ist in einen Pfosten geritzt: Croatoan.","query":"Croatoan"},
-{"text":"Unter den Verschwundenen: Whites eigene Enkelin Virginia Dare, das erste englische Kind, das in Amerika geboren wurde.","query":"Virginia Dare"},
-{"text":"Was mit den Siedlern geschah, weiß bis heute niemand genau.","query":"Roanoke colony map"}
-]}
+{
+ "title": "115 Menschen verschwunden – ein Wort blieb zurück #Roanoke",
+ "tags": [
+  "Roanoke",
+  "Croatoan",
+  "Rätsel",
+  "Geschichte",
+  "Mystery"
+ ],
+ "segments": [
+  {
+   "text": "1587 gründen über hundert Engländer auf der Insel Roanoke eine Kolonie in der Neuen Welt.",
+   "query": "Roanoke colony"
+  },
+  {
+   "text": "Gouverneur John White segelt zurück nach England, um Vorräte zu holen. Wegen eines Krieges mit Spanien kommt er erst drei Jahre später wieder.",
+   "query": "John White Roanoke"
+  },
+  {
+   "text": "Als er 1590 ankommt, ist die Siedlung verlassen. Keine Menschen, keine Gräber, keine Spuren eines Kampfes.",
+   "query": "Roanoke Island 1590"
+  },
+  {
+   "text": "Nur ein einziges Wort ist in einen Pfosten geritzt: Croatoan.",
+   "query": "Croatoan"
+  },
+  {
+   "text": "Unter den Verschwundenen: Whites eigene Enkelin Virginia Dare, das erste englische Kind, das in Amerika geboren wurde.",
+   "query": "Virginia Dare"
+  },
+  {
+   "text": "Was mit den Siedlern geschah, weiß bis heute niemand genau.",
+   "query": "Roanoke colony map"
+  }
+ ],
+ "fallback": "Roanoke Island"
+}

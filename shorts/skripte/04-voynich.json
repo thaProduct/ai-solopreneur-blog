@@ -1,9 +1,37 @@
-{"title":"Das Buch, das niemand lesen kann #Voynich","tags":["Voynich","Manuskript","Rätsel","Geschichte","Mystery"],
-"segments":[
-{"text":"Dieses Buch ist über sechshundert Jahre alt. Und bis heute kann es niemand lesen.","query":"Voynich manuscript"},
-{"text":"Das Voynich-Manuskript. Rund zweihundertvierzig Seiten in einer Schrift, die es sonst nirgendwo auf der Welt gibt.","query":"Voynich manuscript text page"},
-{"text":"Darin: Pflanzen, die kein Botaniker kennt. Sternkarten. Und Frauen, die in grünen Becken baden.","query":"Voynich manuscript plants"},
-{"text":"Die Radiokarbon-Datierung zeigt: Das Pergament stammt aus dem frühen fünfzehnten Jahrhundert.","query":"Voynich manuscript astronomical"},
-{"text":"Selbst die besten Codeknacker des Zweiten Weltkriegs sind daran gescheitert.","query":"Voynich manuscript biological"},
-{"text":"Ist es eine verlorene Sprache, ein Geheimcode oder ein mittelalterlicher Scherz? Was glaubst du?","query":"Voynich manuscript folio"}
-]}
+{
+ "title": "Das Buch, das niemand lesen kann #Voynich",
+ "tags": [
+  "Voynich",
+  "Manuskript",
+  "Rätsel",
+  "Geschichte",
+  "Mystery"
+ ],
+ "segments": [
+  {
+   "text": "Dieses Buch ist über sechshundert Jahre alt. Und bis heute kann es niemand lesen.",
+   "query": "Voynich manuscript"
+  },
+  {
+   "text": "Das Voynich-Manuskript. Rund zweihundertvierzig Seiten in einer Schrift, die es sonst nirgendwo auf der Welt gibt.",
+   "query": "Voynich manuscript text page"
+  },
+  {
+   "text": "Darin: Pflanzen, die kein Botaniker kennt. Sternkarten. Und Frauen, die in grünen Becken baden.",
+   "query": "Voynich manuscript plants"
+  },
+  {
+   "text": "Die Radiokarbon-Datierung zeigt: Das Pergament stammt aus dem frühen fünfzehnten Jahrhundert.",
+   "query": "Voynich manuscript astronomical"
+  },
+  {
+   "text": "Selbst die besten Codeknacker des Zweiten Weltkriegs sind daran gescheitert.",
+   "query": "Voynich manuscript biological"
+  },
+  {
+   "text": "Ist es eine verlorene Sprache, ein Geheimcode oder ein mittelalterlicher Scherz? Was glaubst du?",
+   "query": "Voynich manuscript folio"
+  }
+ ],
+ "fallback": "Voynich manuscript"
+}

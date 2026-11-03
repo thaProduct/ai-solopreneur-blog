@@ -1,9 +1,37 @@
-{"title":"Der rätselhafteste Mordfall Deutschlands #Hinterkaifeck","tags":["Hinterkaifeck","TrueCrime","Bayern","Rätsel","Mystery"],
-"segments":[
-{"text":"Bayern, Frühjahr 1922. Bauer Andreas Gruber entdeckt Fußspuren im Schnee. Sie führen zu seinem Hof. Aber keine führt wieder weg.","query":"Hinterkaifeck"},
-{"text":"Ein Hausschlüssel verschwindet. Auf dem Dachboden hört die Familie Schritte. Gruber durchsucht alles und findet niemanden.","query":"Hinterkaifeck Hof 1922"},
-{"text":"In der Nacht zum ersten April sterben auf dem Einödhof Hinterkaifeck sechs Menschen. Darunter zwei Kinder und eine Magd, die erst am Tag zuvor angekommen war.","query":"Hinterkaifeck Opfer"},
-{"text":"Das Unheimlichste: In den Tagen danach wurde das Vieh gefüttert. Und aus dem Kamin stieg Rauch.","query":"Waidhofen Oberbayern"},
-{"text":"Erst nach vier Tagen werden die Toten gefunden. Der Täter hat offenbar so lange auf dem Hof gelebt.","query":"Hinterkaifeck Marterl"},
-{"text":"Über hundert Jahre später ist der Fall bis heute ungelöst.","query":"Hinterkaifeck Gedenkstein"}
-]}
+{
+ "title": "Der rätselhafteste Mordfall Deutschlands #Hinterkaifeck",
+ "tags": [
+  "Hinterkaifeck",
+  "TrueCrime",
+  "Bayern",
+  "Rätsel",
+  "Mystery"
+ ],
+ "segments": [
+  {
+   "text": "Bayern, Frühjahr 1922. Bauer Andreas Gruber entdeckt Fußspuren im Schnee. Sie führen zu seinem Hof. Aber keine führt wieder weg.",
+   "query": "Hinterkaifeck"
+  },
+  {
+   "text": "Ein Hausschlüssel verschwindet. Auf dem Dachboden hört die Familie Schritte. Gruber durchsucht alles und findet niemanden.",
+   "query": "Hinterkaifeck Hof 1922"
+  },
+  {
+   "text": "In der Nacht zum ersten April sterben auf dem Einödhof Hinterkaifeck sechs Menschen. Darunter zwei Kinder und eine Magd, die erst am Tag zuvor angekommen war.",
+   "query": "Hinterkaifeck Opfer"
+  },
+  {
+   "text": "Das Unheimlichste: In den Tagen danach wurde das Vieh gefüttert. Und aus dem Kamin stieg Rauch.",
+   "query": "Waidhofen Oberbayern"
+  },
+  {
+   "text": "Erst nach vier Tagen werden die Toten gefunden. Der Täter hat offenbar so lange auf dem Hof gelebt.",
+   "query": "Hinterkaifeck Marterl"
+  },
+  {
+   "text": "Über hundert Jahre später ist der Fall bis heute ungelöst.",
+   "query": "Hinterkaifeck Gedenkstein"
+  }
+ ],
+ "fallback": "abandoned farmhouse night"
+}
